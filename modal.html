@@ -1,0 +1,20 @@
+<!--Modal presented on submission, displays inputted data -->
+<div class="modal-header">
+    <h4>Success</h4>
+    <i class='fa fa-times close' ng-click='cancel()'></i>
+</div>
+<div class="modal-body">
+    <p class='success' ng-bind='success_message'></p>
+    <ul class='success'>
+        <li>Name: {{name}}</li>
+        <li>Email: {{email}}</li>
+        <li>Password: {{password}}</li>
+        <li>Age: {{age}}</li>
+        <li>Rating: {{rating}}</li>
+        <li>Message: {{message}}</li>
+    </ul>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-success" ng-click="ok()">Okay</button>
+  <button class="btn" ng-click="cancel()">Cancel</button>
+</div>

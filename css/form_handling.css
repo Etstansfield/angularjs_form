@@ -1,0 +1,88 @@
+/*Style for star rating input, taken from*/
+/*http://www.cssscript.com/simple-5-star-rating-system-with-css-and-html-radios/*/
+
+div.stars {
+  width: 170px;
+  display: inline-block;
+  float:left;
+}
+
+input.star { display: none; }
+
+label.star {
+  float: right;
+  padding: 5px;
+  font-size: 24px;
+  color: #444;
+
+}
+
+input.star:checked ~ label.star:before {
+  content: '\f005';     /*font awesome in css*/
+  color: orange;
+
+}
+
+input.star-1:checked ~ label.star:before { color: orange; }
+
+label.star:hover { color: orange; }
+
+label.star:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}
+
+/*
+    Other Styling - divs, messages etc
+*/
+
+div.col-md-6{
+    padding:1%;
+}
+
+div.row{
+    margin-top:2.5%;
+}
+
+div.container{
+    margin-top:5%;
+}
+
+div.error{
+    padding-top:5%;
+    color:red;
+    font-weight: bold;
+}
+
+.success{
+    color:green;
+}
+
+.close{
+    color:red;
+    cursor: pointer;
+}
+
+.close:hover{
+    color:red;
+}
+
+.fade{
+    opacity: 1 !important;              //overwritten as it was not showing at all with a default of 0 opacity for some reason
+}
+
+.modal-dialog{
+    -webkit-transform: translate(0,0) !important;   //overriding as it was by default coming out the top of the page and cutting off the header
+    transform: translate(0,0) !important; 
+}
+
+
+.modal-backdrop.fade{
+    opacity:0.5 !important;         //overwritten so that it actaully fades instead of showing nothing
+}
+
+.length{
+    color:blue;
+    float:right;
+    font-size:0.8em;
+}

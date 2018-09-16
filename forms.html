@@ -1,0 +1,129 @@
+<!--
+    @desc - A basic form implenting Angular Form Handling, with a modal on submission And Bootstrap CSS
+    @Author - Edward Stansfield - 2017
+-->
+<html>
+    <head>
+    
+        <title>
+            Angular Forms - Ed Stansfield
+        </title>
+        
+        <!-- CSS Links -->
+        <link rel='stylesheet' href='css/bootstrap.min.css'></link>     <!-- Bootstrap -->
+        <link rel='stylesheet' href='css/bootstrap-grid.min.css'></link>     <!-- Bootstrap grid -->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"></link> <!-- Fontawesome -->
+        <link href="css/form_handling.css" rel='stylesheet'></link>     <!-- Custom Css ->>
+        
+        
+        <!-- JS Links -->
+        <script src="angular.min.js"></script>      <!-- Angular - Minimised -->
+        <script src="app.js"></script>           <!-- Custom Angular Script-->
+        <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.9.0.js"></script>                <!-- Angular Bootstrap Functionality -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.11/angular-messages.js"></script>    <!-- Angular Messages -->
+        
+    </head>
+    <body ng-app='formApp'> <!-- Register The Angular App -->
+    
+        <!-- Main Body Code -->
+        <div class='container' ng-controller='mainController'>  <!-- Register The Angular Controller -->
+            
+            <h3>Angular Form Control</h3>
+            <form name='valForm' ng-submit='submit()'>
+                
+                <!-- name and password -->
+                <div class='row'>
+
+                    <div class='col-md-6'>
+                        <label>Name</label> <!-- Uses Pattern Validation  similar to html5 pattern validation -->
+                        <input type='text' name='name' required ng-model='name' ng-pattern='/[A-Za-z]/' ng-minlength='2' ng-maxlength='10' class='form-control' placeholder='Enter Text Here...'></input>
+                        
+                        <div class='error' ng-messages="valForm.name.$error" ng-if='valForm.name.$dirty' role="alert">
+                            <div ng-message="required">Name is Required</div>
+                            <div ng-message="minlength">Minimum Length 2</div>
+                            <div ng-message="maxlength">Maximum Length 10</div>
+                            <div ng-message="pattern">Text Only Allowed</div>
+                          </div>
+                    </div>
+
+                    <div class='col-md-6'>
+                        <label>Password</label>
+                        <input name='password' type='password' ng-model='password' ng-pattern='/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/' ng-minlength='6' required class='form-control' placeholder='Enter Password Here...'></input>
+                        <div ng-messages="valForm.password.$error" ng-if='valForm.password.$dirty' class='error' role="alert">
+                            <div ng-message="required">Password is Required</div>
+                            <div ng-message="minlength">Minimum Length 6</div>
+                            <div ng-message="pattern">Need at least 1 Number and 1 Capital Letter and 1 Lower Case Letter</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Email and Age -->
+                <div class='row'>
+
+                    <div class='col-md-6'>
+                        <label>Email</label>
+                        <input type='email' name='email' required ng-model='email' class='form-control' placeholder='Enter Email Here...'></input>
+                    
+                        <div ng-messages="valForm.email.$error" ng-if='valForm.email.$dirty' class='error' role="alert">
+                            <div ng-message="required">Email is Required</div>
+                            <div ng-message="email">Email is not in the correct format!</div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class='col-md-6'>
+                        
+                        <label>Age</label>
+                        <input type='number' step='1' name='age' required ng-model='age' class='form-control' ng-min='18'  ng-max='150' placeholder='Enter Age Here...'></input>
+        
+                        <div ng-messages="valForm.age.$error" ng-if='valForm.age.$dirty' class='error' role="alert">
+                            <div ng-message="max">Max age 150.</div>
+                            <div ng-message="min">Min age 18.</div>
+                            <div ng-message="required">Age is Required!</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Row for Rating and optional message -->
+                <div class='row'>
+                    
+                    <div class='col-md-6'>
+                        <label>Rating</label><br/>
+                        <div class="stars">
+
+                            <input class="star star-5" ng-model="rating" id="star-5" value="5" name="star" type="radio">
+                            <label class="star star-5" for="star-5"></label>
+                            <input class="star star-4" ng-model="rating" id="star-4" value="4" name="star" type="radio">
+                            <label class="star star-4" for="star-4"></label>
+                            <input class="star star-3" ng-model="rating" id="star-3" value="3" name="star" type="radio">
+                            <label class="star star-3" for="star-3"></label>
+                            <input class="star star-2" ng-model="rating" id="star-2" value="2" name="star" type="radio">
+                            <label class="star star-2" for="star-2"></label>
+                            <input class="star star-1" ng-model="rating" id="star-1" value="1" name="star" type="radio">
+                            <label class="star star-1" for="star-1"></label>
+
+                        </div>
+
+                    </div>
+                    
+                    <div class='col-md-6'>
+                        
+                        <label>Message</label>
+                        <textarea type='text' name='message' ng-model='message' class='form-control' ng-maxlength="50" placeholder='Enter Message Here...'></textarea>
+                        <span class='length'>({{message.length}}/{{message_max}})</span>
+                        <div ng-messages="valForm.message.$error" ng-if='valForm.message.$dirty' class='error' role="alert">
+                            <div ng-message="maxlength">Max 50 Characters.</div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- Form Disabled When Validation Rules Not Met -->
+                <input type='submit' ng-disabled='valForm.$invalid || rating == 0' class='btn btn-info'></input>
+            </form>
+
+        </div>
+    </body>
+</html>
